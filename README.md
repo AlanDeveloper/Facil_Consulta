@@ -7,8 +7,7 @@ Tecnologias utilizadas:
 
 IDE: VSCode
 
-## Para iniciar o projeto(servidor embutido):
+## Para iniciar o projeto:
 ```
-    cd src
-    php -S localhost:2000
+    npm run serve
 ```

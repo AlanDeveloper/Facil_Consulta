@@ -34,4 +34,11 @@
             
             echo $this->parseTemplate($base, $this->args);
         }
+
+        public function register() {
+            $base = $this->getBaseTemplate($this->baseTemplate);
+            $this->args['template'] = $this->getTemplate($this->dir . 'register.php');
+            
+            echo $this->parseTemplate($base, $this->args);
+        }
     }

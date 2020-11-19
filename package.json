@@ -1,0 +1,21 @@
+{
+  "name": "facil_consulta",
+  "version": "1.0.0",
+  "description": "Projeto teste",
+  "main": "src/index.php",
+  "scripts": {
+    "serve": "php -S localhost:2000 -t src/",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AlanDeveloper/Facil_Consulta.git"
+  },
+  "author": "Alan Santos",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/AlanDeveloper/Facil_Consulta/issues"
+  },
+  "homepage": "https://github.com/AlanDeveloper/Facil_Consulta#readme",
+  "dependencies": {}
+}

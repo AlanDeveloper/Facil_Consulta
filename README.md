@@ -9,5 +9,6 @@ IDE: VSCode
 
 ## Para iniciar o projeto(servidor embutido):
 ```
+    cd src
     php -S localhost:2000
 ```

@@ -4,7 +4,7 @@
   "description": "Projeto teste",
   "main": "src/index.php",
   "scripts": {
-    "serve": "php -S localhost:2000 -t src/",
+    "serve": "php -S localhost:2000 -t src/ && start browser localhost:2000",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

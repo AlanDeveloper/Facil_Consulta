@@ -1,10 +1,12 @@
 <?php
 
     class Controller {
+        private $model_medic;
         private $view;
 
         public function __construct() {
             $this->view = new View;
+            $this->model_medic = new Model_Medic;
             
             $this->routes();
         }   
@@ -21,11 +23,14 @@
             $router->get('/register', function () {
                 $this->view->register();
             });
+            $router->post('/register', function () {
+                $this->model_medic->add();
+            });
+            $router->get('/delete/1', function () {
+                $this->model_medic->delete();
+            });
 
             $resp = $router->find();
             echo $resp();
-
-            // $path == '/home' || $path == '/' ? $this->index() : null;
-            // $path == '/register' ? $this->register($method) : null;
         }
     }

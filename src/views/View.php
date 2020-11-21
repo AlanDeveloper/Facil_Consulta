@@ -2,43 +2,34 @@
 
     class View {
 
-        protected $dir = 'views/templates/';
-        protected $baseTemplate = 'views/base.php';
-        protected $args = array(
-            'title' => 'Facil Consulta'
+        private $args = array(
+            'title' => 'Facil Consulta',
+            'error' => null,
+            'inputs' => array(
+                'name' => '',
+                'email' => '',
+            )
         );
 
-        private function getBaseTemplate($arc) {
-            if (is_file($arc)) return file_get_contents($arc);
+        public function setInputs() {
+            $this->args['inputs']['name'] = $_POST['name']; 
+            $this->args['inputs']['email'] = $_POST['email']; 
         }
 
-        private function getTemplate($arc) {
-            if (is_file($arc)) return file_get_contents($arc);
+        public function setError($error) {
+            $this->args['error'] = $error;
         }
 
-        private function parseTemplate($base, $array) {
-            foreach ($array as $a => $b) {
-                $base = str_replace(
-                    array(
-                        '{{'.$a.'}}', '{{ '.$a.' }}'
-                    ), $b, $base
-                );
-            }
+        public function home($list) {
+            $this->args['list'] = $list;
+            $data = $this->args;
 
-            return $base;
-        }
-
-        public function home() {
-            $base = $this->getBaseTemplate($this->baseTemplate);
-            $this->args['template'] = $this->getTemplate($this->dir . 'home.php');
-            
-            echo $this->parseTemplate($base, $this->args);
+            include 'home.php';
         }
 
         public function register() {
-            $base = $this->getBaseTemplate($this->baseTemplate);
-            $this->args['template'] = $this->getTemplate($this->dir . 'register.php');
+            $data = $this->args;
             
-            echo $this->parseTemplate($base, $this->args);
+            include 'register.php';
         }
     }

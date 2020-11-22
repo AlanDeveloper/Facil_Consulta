@@ -1,0 +1,36 @@
+.hoursTable {
+    background-color: var(--color-white);
+    padding: 20px;
+    margin: 20px 0;
+}
+
+.hoursTable h3 {
+    color: var(--color-blue-dark);
+    font-weight: bold;
+    text-align: center;
+    margin: 10px 0 20px 0;
+}
+
+.hoursTable div {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    color: var(--color-blue-dark);
+    border-bottom: .5px solid var(--color-dark);
+}
+
+.hoursTable p {
+    margin: 0px;
+}
+
+.hoursTable div a {
+    color: red;
+    font-size: 0.8rem;
+    text-decoration: underline;
+}
+
+.hoursTable div#nothing {
+    justify-content: center;
+    text-align: center;
+    border-bottom: 0;
+}

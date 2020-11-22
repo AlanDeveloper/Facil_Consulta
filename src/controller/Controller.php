@@ -1,12 +1,14 @@
 <?php
 
     class Controller {
-        private $model_medic;
         private $view;
+        private $model_medic;
+        private $model_agend;
 
         public function __construct() {
             $this->view = new View;
             $this->model_medic = new Model_Medic;
+            $this->model_agend = new Model_Agend;
             
             $this->routes();
         }   
@@ -33,6 +35,9 @@
 
             $router->get('/', function () {
                 $list = $this->model_medic->listAll();
+                foreach ($list as $obj) {
+                    $obj = $this->model_agend->listHours($obj);
+                }
                 $this->view->home($list);
             });
             $router->get('/register', function () {
@@ -64,6 +69,15 @@
                     $this->view->setError('Senha incorreta.');
                     $this->view->alter($obj);
                 }
+            });
+            $router->get('/agend', function () {
+                $obj = $this->model_medic->find();
+                $obj = $this->model_agend->listHours($obj);
+                $this->view->agend($obj);
+            });
+            $router->post('/agend', function () {
+                $this->model_agend->add();
+                header('Location: /');
             });
             $router->get('/delete', function () {
                 $this->model_medic->delete();

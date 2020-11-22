@@ -39,4 +39,11 @@
 
             include 'alter.php';
         }
+
+        public function agend($obj) {
+            $this->args['obj'] = $obj;
+            $data = $this->args;
+
+            include 'agend.php';
+        }
     }

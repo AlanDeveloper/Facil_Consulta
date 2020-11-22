@@ -6,6 +6,7 @@
     // Import Models
     include 'models/Model.php';
     include 'models/Model_Medic.php';
+    include 'models/Model_Agend.php';
 
     // Import Views
     include 'views/View.php';

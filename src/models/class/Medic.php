@@ -7,6 +7,7 @@
         private $password;
         private $dt_create;
         private $dt_alter;
+        private $hours = [];
 
         public function __construct($name, $email, $password) {
             $this->name = $name;
@@ -37,6 +38,10 @@
         public function getDtAlter() {
             return $this->dt_alter;
         }
+
+        public function getHours() {
+            return $this->hours;
+        }
         
         public function setId($id) {
             $this->id = $id;
@@ -60,5 +65,9 @@
 
         public function setDtAlter($dt_alter) {
             $this->dt_alter = $dt_alter;
+        }
+
+        public function setHours($hours) {
+            $this->hours = $hours;
         }
     }

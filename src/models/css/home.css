@@ -9,7 +9,6 @@ main {
     
     background-color: var(--color-white);
     padding: 20px;
-    margin-bottom: 20px;
 }
 
 .header-row h3 {
@@ -21,4 +20,27 @@ main {
     font-size: 0.8rem;
     color: var(--color-blue-light);
     border-color: var(--color-blue-light);
+}
+
+.body-row {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+
+    background-color: var(--color-white);
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.card {
+    border-radius: 5px;
+    padding: 5px 15px;
+    margin: 0 15px 15px 0;
+    color: var(--color-white);
+    background-color: var(--color-blue-light);
+}
+
+.card p {
+    font-weight: bold;
+    margin: 0;
 }

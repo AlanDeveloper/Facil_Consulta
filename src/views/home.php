@@ -26,7 +26,17 @@
                 <h3>Dr. <?php echo $obj->getName(); ?></h3>
                 <div>
                     <button class="btn"><a href="/alter?m=<?php echo $obj->getId(); ?>">Editar cadastro</a></button>
+                    <button class="btn"><a href="/agend?m=<?php echo $obj->getId(); ?>">Configurar horários</a></button>
                 </div>
+            </div>
+            <div class="body-row">
+                <?php for ($i=0, $array = $obj->getHours(); $i < count($array); $i++): ?>
+                    <div class="card">
+                        <p><?php 
+                            $date = date('d/m/Y', strtotime($array[$i])) . ' às ' . date('H:i', strtotime($array[$i]));
+                            echo $date; ?></p>
+                    </div>
+                <?php endfor; ?>
             </div>
         <?php endforeach; ?>
     </main>

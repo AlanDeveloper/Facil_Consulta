@@ -13,7 +13,7 @@ form h3 {
     color: var(--color-blue-dark);
     font-weight: bold;
     text-align: center;
-    margin: 10px 0;
+    margin: 10px 0 20px 0;
 }
 
 form button {
@@ -31,6 +31,17 @@ form label {
 form input {
     border-color: var(--color-dark);
     color: var(--color-blue-dark);
+}
+
+form output {
+    font-weight: bold;
+    font-size: 1.5rem;
+    color: var(--color-blue-dark);
+}
+
+form #hour {
+    display: flex;
+    flex-direction: column;
 }
 
 form a {

@@ -56,6 +56,7 @@
             $router->post('/alter', function () {
                 $obj = $this->model_medic->find();
                 $resp = $this->model_medic->save($obj);
+                // $this->model_medic->al();
 
                 if($resp) {
                     header('Location: /');

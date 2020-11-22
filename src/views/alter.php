@@ -27,12 +27,12 @@
                 <input type="text" class="form-control" value="<?php echo $data['obj']->getName(); ?>" minlength="6" maxlength="250" name="name" id="name"  placeholder="Insira o nome do profissional" required>
             </div>
             <div class="form-group">
-                <label for="newpassword">Senha antiga</label>
-                <input type="password" class="form-control" minlength="6" maxlength="250" name="newpassword" id="newpassword" placeholder="Insira a senha antiga" required>
+                <label for="password">Senha antiga</label>
+                <input type="password" class="form-control" minlength="6" maxlength="250" name="password" id="password" placeholder="Insira a senha antiga" required>
             </div>
             <div class="form-group">
-                <label for="repeatnewpassword">Nova senha</label>
-                <input type="password" class="form-control" minlength="6" maxlength="250" name="repeatnewpassword" id="repeatnewpassword" placeholder="Escolha uma nova senha forte e segura">
+                <label for="newpassword">Nova senha</label>
+                <input type="password" class="form-control" minlength="6" maxlength="250" name="newpassword" id="newpassword" placeholder="Escolha uma nova senha forte e segura">
             </div>
             <?php if($data['error']): ?>
                 <div class="alert alert-warning" role="alert"><?php echo $data['error']; ?></div>

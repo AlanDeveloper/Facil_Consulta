@@ -15,30 +15,16 @@
             }
         }
 
-        public function add() {
-            $obj = $this->create_obj();
-            try {
-                $conn = $this->connect();
-                $query = $conn->prepare('INSERT INTO medico (nome, email, senha, data_criacao, data_alteracao) VALUES (?, ?, ?, NOW(), NOW())');
-                $query->execute(array(
-                    $obj->getName(),
-                    $obj->getEmail(),
-                    MD5($obj->getPassword())
-                ));
-            } catch(PDOException $e) {
-                echo 'ERROR: ' . $e->getMessage();
-            }
-        } 
-
         public function save($obj = null) {
             if(isset($obj)) {
-                
                 if($obj->getPassword() == MD5($_POST['password'])) {
-                    $sql = 'UPDATE medico SET nome=?, email=?, senha=?, data_alteracao=NOW() WHERE id=?';
+                    $obj->setName($_POST['name']);
+                    if(($_POST['newpassword']) != '') $obj->setPassword(MD5($_POST['newpassword']));
+                    
+                    $sql = 'UPDATE medico SET nome = ?, senha = ?, data_alteracao = NOW() WHERE id = ?';
                     $array = array(
                         $obj->getName(),
-                        $obj->getEmail(),
-                        $_POST['newpassword'] != '' ? MD5($_POST['newpassword']) : $obj->getPassword(),
+                        $obj->getPassword(),
                         $obj->getId()
                     );
                 } else {
@@ -53,10 +39,11 @@
                     MD5($obj->getPassword())
                 );
             }
-
             $conn = $this->connect();
             $query = $conn->prepare($sql);
             $query->execute($array);
+
+            return true;
         }
 
         public function delete() {

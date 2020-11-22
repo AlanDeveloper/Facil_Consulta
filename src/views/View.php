@@ -32,4 +32,11 @@
             
             include 'register.php';
         }
+
+        public function alter($obj) {
+            $this->args['obj'] = $obj;
+            $data = $this->args;
+
+            include 'alter.php';
+        }
     }

@@ -7,4 +7,3 @@
         'user' => 'root',
         'password' => ''
     );
-    extract($database);

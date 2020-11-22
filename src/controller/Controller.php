@@ -41,7 +41,7 @@
             $router->post('/register', function () {
                 $error = $this->verifyForm();
                 if($error == '') {
-                    $this->model_medic->add();
+                    $this->model_medic->save();
                     header('Location: /');
                 } else {
                     $this->view->setInputs();
@@ -49,8 +49,24 @@
                     $this->view->register();
                 }
             });
-            $router->get('/delete/1', function () {
+            $router->get('/alter', function () {
+                $obj = $this->model_medic->find();
+                $this->view->alter($obj);
+            });
+            $router->post('/alter', function () {
+                $obj = $this->model_medic->find();
+                $resp = $this->model_medic->save($obj);
+
+                if($resp) {
+                    header('Location: /');
+                } else {
+                    $this->view->setError('Senha incorreta.');
+                    $this->view->alter($obj);
+                }
+            });
+            $router->get('/delete', function () {
                 $this->model_medic->delete();
+                header('Location: /');
             });
 
             $resp = $router->find();

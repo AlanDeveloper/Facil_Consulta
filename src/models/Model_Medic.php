@@ -23,18 +23,47 @@
                 $query->execute(array(
                     $obj->getName(),
                     $obj->getEmail(),
-                    $obj->getPassword()
+                    MD5($obj->getPassword())
                 ));
             } catch(PDOException $e) {
                 echo 'ERROR: ' . $e->getMessage();
             }
         } 
 
+        public function save($obj = null) {
+            if(isset($obj)) {
+                
+                if($obj->getPassword() == MD5($_POST['password'])) {
+                    $sql = 'UPDATE medico SET nome=?, email=?, senha=?, data_alteracao=NOW() WHERE id=?';
+                    $array = array(
+                        $obj->getName(),
+                        $obj->getEmail(),
+                        $_POST['newpassword'] != '' ? MD5($_POST['newpassword']) : $obj->getPassword(),
+                        $obj->getId()
+                    );
+                } else {
+                    return false;
+                }
+            } else {
+                $obj = $this->create_obj();
+                $sql = 'INSERT INTO medico (nome, email, senha, data_criacao, data_alteracao) VALUES (?, ?, ?, NOW(), NOW())';
+                $array = array(
+                    $obj->getName(),
+                    $obj->getEmail(),
+                    MD5($obj->getPassword())
+                );
+            }
+
+            $conn = $this->connect();
+            $query = $conn->prepare($sql);
+            $query->execute($array);
+        }
+
         public function delete() {
             try {
                 $conn = $this->connect();
                 $query = $conn->prepare('DELETE FROM medico WHERE id = ?');
-                $query->execute(array(1));
+                $query->execute(array($_GET['m']));
             } catch(PDOException $e) {
                 echo 'ERROR: ' . $e->getMessage();
             }
@@ -52,5 +81,19 @@
             }
 
             return $medics;
+        }
+
+        public function find() {
+            $conn = $this->connect();
+            $query = $conn->prepare('SELECT * FROM medico WHERE id = ?');
+            $query->execute(array($_GET['m']));
+
+            $medics = array();
+            $result = $query->fetchAll();
+            foreach ($result as $obj) {
+                array_push($medics, $this->create_obj($obj));
+            }
+
+            return $medics[0];
         }
     }

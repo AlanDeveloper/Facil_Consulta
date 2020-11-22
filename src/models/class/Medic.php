@@ -11,7 +11,7 @@
         public function __construct($name, $email, $password) {
             $this->name = $name;
             $this->email = $email;
-            $this->password = MD5($password);
+            $this->password = $password;
         }
 
         public function getId() {

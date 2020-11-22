@@ -11,6 +11,7 @@
         }
 
         public function get($route, $action) {
+            if(strpos($route, '?')) $route = $this->removeParams($route);
             $this->add('GET', $route, $action);
         }
 
@@ -23,6 +24,7 @@
         }
 
         public function find() {
+            if(strpos($this->path, '?')) $this->path = $this->removeParams($this->path);
             if (isset($this->routes[$this->method][$this->path]) && !empty($this->routes[$this->method])) {
                 return $this->routes[$this->method][$this->path];
             } else {
@@ -30,6 +32,9 @@
                     return 'Página não encontrada.';
                 };
             }
+        }
 
+        public function removeParams($route) {
+            return explode('?', $route)[0];
         }
     }

@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
     <link rel="stylesheet" href="models/css/style.css">
-    <link rel="stylesheet" href="models/css/header.css">
     <link rel="stylesheet" href="models/css/form.css">
     <title><?php echo $data['title']?></title>
 </head>
@@ -19,7 +18,7 @@
             </ul>
         </nav>
     </header>
-    <main class="container col-md-5">
+    <main class="container">
         <form action="/alter?m=<?php echo $data['obj']->getId(); ?>" method="POST">
             <h3>Editar médico</h3>
             <div class="form-group">

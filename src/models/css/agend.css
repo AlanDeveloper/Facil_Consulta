@@ -1,7 +1,7 @@
 .hoursTable {
     background-color: var(--color-white);
     padding: 20px;
-    margin: 20px 0;
+    max-width: 500px;
 }
 
 .hoursTable h3 {
@@ -15,8 +15,9 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    padding: 5px 0;
     color: var(--color-blue-dark);
-    border-bottom: .5px solid var(--color-dark);
+    border-bottom: .5px solid var(--color-body);
 }
 
 .hoursTable p {
@@ -29,8 +30,13 @@
     text-decoration: underline;
 }
 
-.hoursTable div#nothing {
-    justify-content: center;
-    text-align: center;
-    border-bottom: 0;
+@media(max-width: 1050px) {
+    .row {
+        flex-direction: column;
+    }
+
+    .hoursTable {
+        margin: auto;
+        margin-top: 20px;
+    }
 }

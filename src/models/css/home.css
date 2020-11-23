@@ -1,5 +1,6 @@
-main {
-    margin-top: 50px;
+.agend {
+    max-width: 900px;
+    margin: auto;
 }
 
 .header-row {
@@ -26,21 +27,48 @@ main {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-
+    justify-content: space-between;
+    
     background-color: var(--color-white);
     padding: 20px;
     margin-bottom: 20px;
 }
 
-.card {
+.hour {
     border-radius: 5px;
     padding: 5px 15px;
-    margin: 0 15px 15px 0;
+    margin: 0 0 15px 0;
     color: var(--color-white);
     background-color: var(--color-blue-light);
 }
 
-.card p {
+.hour p {
     font-weight: bold;
     margin: 0;
+}
+
+@media(max-width: 768px) {
+    .header-row {
+        flex-direction: column;
+    }
+
+    .header-row h3 {
+        text-align: center;
+    }
+
+    .header-row div {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 20px;
+    }
+}
+
+@media(max-width: 460px) {
+
+    .body-row {
+        flex-direction: column;
+        justify-content: center;
+
+        text-align: center;
+    }
 }

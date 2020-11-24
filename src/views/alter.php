@@ -23,7 +23,7 @@
             <h3>Editar médico</h3>
             <div class="form-group">
                 <label for="name">Nome</label>
-                <input type="text" class="form-control" value="<?php echo $data['obj']->getName(); ?>" minlength="6" maxlength="250" name="name" id="name"  placeholder="Insira o nome do profissional" required>
+                <input type="text" class="form-control" value="<?php if($data['inputs']['name'] != '') { echo $data['inputs']['name']; } else { echo $data['obj']->getName(); }?>" minlength="6" maxlength="250" name="name" id="name"  placeholder="Insira o nome do profissional" required>
             </div>
             <div class="form-group">
                 <label for="password">Senha antiga</label>

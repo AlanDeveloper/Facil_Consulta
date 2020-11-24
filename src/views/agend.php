@@ -33,6 +33,9 @@
                         <label for="datetime">Data e hora:</label>
                         <input type="datetime-local" class="form-control" id="datetime" name="datetime" required>
                     </div>
+                     <?php if($data['error']): ?>
+                        <div class="alert alert-warning" role="alert"><?php echo $data['error']; ?></div>
+                    <?php endif; ?>
                     <button type="submit" class="btn btn-primary">Adicionar horário</button>
                     <a href="/">Voltar para a Página Inicial</a>
                 </form>
@@ -43,7 +46,7 @@
                     <?php for ($i=0, $array = $data['obj']->getHours(); $i < count($array); $i++): ?>
                         <div>
                             <p><?php echo date('d/m/Y H:i', strtotime($array[$i])) ?></p>
-                            <a href="#">Remover</a>
+                            <a href="/agend/delete?m=<?php echo $obj->getId() . 'date=' . $array[$i]; ?>">Remover</a>
                         </div>
                     <?php endfor; ?>
                     <?php if(count($data['obj']->getHours()) == 0): ?>

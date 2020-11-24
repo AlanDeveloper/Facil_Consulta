@@ -13,7 +13,7 @@
 
         public function setInputs() {
             $this->args['inputs']['name'] = $_POST['name']; 
-            $this->args['inputs']['email'] = $_POST['email']; 
+            if(isset($_POST['email'])) $this->args['inputs']['email'] = $_POST['email']; 
         }
 
         public function setError($error) {

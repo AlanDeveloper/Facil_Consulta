@@ -39,21 +39,16 @@
                     MD5($obj->getPassword())
                 );
             }
-            $conn = $this->connect();
-            $query = $conn->prepare($sql);
-            $query->execute($array);
 
-            return true;
-        }
-
-        public function delete() {
             try {
                 $conn = $this->connect();
-                $query = $conn->prepare('DELETE FROM medico WHERE id = ?');
-                $query->execute(array($_GET['m']));
-            } catch(PDOException $e) {
-                echo 'ERROR: ' . $e->getMessage();
+                $query = $conn->prepare($sql);
+                $query->execute($array);
+            } catch(PDOException $Exception) {
+                return $Exception->getCode();
             }
+
+            return true;
         }
 
         public function listAll() {

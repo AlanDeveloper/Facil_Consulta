@@ -45,13 +45,17 @@
                     <h3>Horários configurados</h3>
                     <?php for ($i=0, $array = $data['obj']->getHours(); $i < count($array); $i++): ?>
                         <div>
-                            <p><?php echo date('d/m/Y H:i', strtotime($array[$i])) ?></p>
-                            <a href="/agend/delete?m=<?php echo $obj->getId() . 'date=' . $array[$i]; ?>">Remover</a>
+                            <p>
+                                <a href="/agend/ocuppy?m=<?php echo $obj->getId() . 'date=' . $array[$i][0]; ?>"><?php echo date('d/m/Y H:i', strtotime($array[$i][0])) ?></a>
+                            </p>
+                            <?php if(!$array[$i][1]):?>
+                                <a href="/agend/delete?m=<?php echo $obj->getId() . 'date=' . $array[$i][0]; ?>" class="remove">Remover</a>
+                            <?php endif;?>
                         </div>
                     <?php endfor; ?>
                     <?php if(count($data['obj']->getHours()) == 0): ?>
                         <div class='notFound'>
-                            <p>Nenhum horário agendado.</p>
+                            <p>Nenhum horário disponível.</p>
                         </div>
                     <?php endif?>
                 </div>

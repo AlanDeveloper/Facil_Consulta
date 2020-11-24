@@ -24,7 +24,7 @@
     margin: 0px;
 }
 
-.hoursTable div a {
+.hoursTable div a.remove {
     color: red;
     font-size: 0.8rem;
     text-decoration: underline;

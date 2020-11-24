@@ -3,7 +3,7 @@
     class Model_Agend extends Model {
 
         public function add() {
-            $sql = 'INSERT INTO horario (id_medico, data_horario, horario_agendado, data_criacao, data_alteracao) VALUES (:id_medico, :datetime, true, NOW(), NOW())';
+            $sql = 'INSERT INTO horario (id_medico, data_horario, horario_agendado, data_criacao, data_alteracao) VALUES (:id_medico, :datetime, false, NOW(), NOW())';
             $conn = $this->connect();
             $query = $conn->prepare($sql);
             $query->execute(array(
@@ -34,7 +34,7 @@
             $array = array();
             $result = $query->fetchAll();
             foreach ($result as $hour) {
-                array_push($array, $hour['data_horario']);
+                array_push($array, array($hour['data_horario'], $hour['horario_agendado']));
             }
             $obj->setHours($array);
 
@@ -44,6 +44,15 @@
         public function delete() {
             $conn = $this->connect();
             $query = $conn->prepare('DELETE FROM horario WHERE id_medico = ? and data_horario = ?');
+            $query->execute(array(
+                explode('date=', $_GET['m'])[0],
+                explode('date=', $_GET['m'])[1]
+            ));
+        }
+
+        public function ocuppy() {
+            $conn = $this->connect();
+            $query = $conn->prepare('UPDATE horario SET horario_agendado = true WHERE id_medico = ? and data_horario = ?');
             $query->execute(array(
                 explode('date=', $_GET['m'])[0],
                 explode('date=', $_GET['m'])[1]

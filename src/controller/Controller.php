@@ -47,6 +47,7 @@
                 foreach ($list as $obj) {
                     $obj = $this->model_agend->listHours($obj);
                 }
+                $list = $this->getFirstDate($list);
                 $this->view->home($list);
             });
             $router->get('/register', function () {
@@ -103,7 +104,7 @@
                 $error = $this->model_agend->find();
                 if(!$error) {
                     $this->model_agend->add();
-                    header('Location: /');
+                    header('Location: /agend?m=' . $_GET['m']);
                 } else {
                     $obj = $this->model_medic->find();
                     $obj = $this->model_agend->listHours($obj);
@@ -112,6 +113,10 @@
                     $this->view->agend($obj);
                 }
             });
+            $router->get('/agend/ocuppy', function () {
+                $this->model_agend->ocuppy();
+                header('Location: /agend?m=' . explode('date=', $_GET['m'])[0]);
+            });
             $router->get('/agend/delete', function () {
                 $this->model_agend->delete();
                 header('Location: /agend?m=' . explode('date=', $_GET['m'])[0]);
@@ -119,6 +124,65 @@
 
             $resp = $router->find();
             echo $resp();
+        }
+
+        public function getFirstDate($list) {
+            $array = array();
+            $arrayNoTime = array();
+
+            $c = 0;
+            $now = strtotime(date("Y-m-d H:i"));
+            foreach ($list as $obj) {
+                $hour = $obj->getHours();
+                for ($i=0; $i < count($hour); $i++) {
+                    $marked = strtotime(date('d-m-Y H:i', strtotime($hour[$i][0])));
+                    if($now < $marked) {
+                        if(isset($array[$c])) {
+                            $array[$c][0] = $marked < strtotime(date('d-m-Y H:i', strtotime($array[$c][0]))) ? $hour[$i][0] : $array[$c][0];
+                            $array[$c][1] = $obj->getId();
+                        } else {
+                            $array[$c][0] = $hour[$i][0];
+                            $array[$c][1] = $obj->getId();
+                        }
+                    }
+                }
+                if(!count($hour)) {
+                    array_push($arrayNoTime, $obj->getId());
+                } else {
+                    $c = count($array);
+                }
+            }
+
+            $array = $this->order($array);
+            $array = array_merge($array, $arrayNoTime);
+
+            $arrayOrdened = array();
+            for ($i=0; $i < (count($array)); $i++) { 
+                foreach ($list as $obj) {
+                    if($obj->getId() == $array[$i]) {
+                        array_push($arrayOrdened, $obj);
+                    }
+                }
+            }
+            return $arrayOrdened;
+        }
+
+        public function order($list) {
+            $array = array();
+            for ($i=0; $i < count($list); $i++) { 
+                $hour = strtotime(date('d-m-Y H:i', strtotime($list[$i][0])));
+
+                for ($j=0; $j < count($list); $j++) {
+                    if(!in_array($list[$j][1], $array)) {
+                        if(isset($array[$i])) {
+                            $array[$i] = strtotime(date('d-m-Y H:i', strtotime($list[$j][0]))) < $hour ? $list[$j][1] : $array[$i]; 
+                        } else {
+                            $array[$i] = $list[$j][1];
+                        }
+                    }
+                }
+            }
+            return $array;
         }
 
         public function getError($code) {

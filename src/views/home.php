@@ -34,13 +34,13 @@
                         <?php for ($i=0, $array = $obj->getHours(); $i < count($array); $i++): ?>
                             <div class="hour">
                                 <p><?php 
-                                    $date = date('d/m/Y', strtotime($array[$i])) . ' às ' . date('H:i', strtotime($array[$i]));
+                                    $date = date('d/m/Y', strtotime($array[$i][0])) . ' às ' . date('H:i', strtotime($array[$i][0]));
                                     echo $date; ?></p>
                             </div>
                         <?php endfor; ?>
                         <?php if(count($array) == 0): ?>
                             <div class='notFound'>
-                                <p>Nenhum horário agendado.</p>
+                                <p>Nenhum horário disponível.</p>
                             </div>
                         <?php endif?>
                     </div>

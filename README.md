@@ -2,8 +2,9 @@
 
 Tecnologias utilizadas:
 
-- PHP
-- MySql
+- PHP 7
+- Bootstrap 4
+- JQuery 3
 
 IDE: VSCode
 
